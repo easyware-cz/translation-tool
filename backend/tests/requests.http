@@ -1,0 +1,32 @@
+// needed VS Code extension: REST Client
+
+@HOSTNAME=http://localhost:5050
+
+GET {{HOSTNAME}}/translations
+
+###
+GET {{HOSTNAME}}/translations/1
+
+###
+POST {{HOSTNAME}}/translations
+Content-Type: application/json
+
+{
+    "language": "sk",
+    "translation": "Priezvisko"
+}
+
+###
+PUT {{HOSTNAME}}/translations/3
+Content-Type: application/json
+
+{
+    "language": "cs",
+    "translation": "Příjmení updated"
+}
+
+###
+DELETE {{HOSTNAME}}/translations/3
+
+
+
