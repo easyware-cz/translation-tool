@@ -1,0 +1,5 @@
+@HOSTNAME=http://localhost:5050
+
+GET {{HOSTNAME}}/languages
+
+

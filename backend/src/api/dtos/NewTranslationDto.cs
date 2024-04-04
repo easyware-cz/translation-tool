@@ -1,8 +1,12 @@
-﻿namespace src.api.dtos;
+﻿using System.ComponentModel.DataAnnotations;
 
-public record class NewTranslationDto(
-    string Language,
-    string Translation,
-    string ModifiedBy
-);
+namespace src.api.dtos
+{
+    public record class NewTranslationDto(
+        int Language_id,
+        [Required] string TranslationText,
+        DateTime ModifiedAt,
+        string ModifiedBy
+    );
 
+}

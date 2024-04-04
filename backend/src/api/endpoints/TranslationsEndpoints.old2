@@ -1,0 +1,111 @@
+﻿//before mapping
+
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using src.api.dtos;
+using src.data.db;
+using src.data.entities;
+using src.data.mapping;
+
+namespace src.api.endpoints;
+
+public static class TranslationsEndpoints
+{
+    const string GetTranslationEndpointName = "GetTranslation";
+
+    private static readonly List<TranslationDto> translations = [
+        new (
+            1,
+            "en",
+            "Last name",
+            new DateTime(),
+            "current user"
+        ),
+        new (
+            2,
+            "de",
+            "Nachname",
+            new DateTime(),
+            "current user"
+        ),
+        new (
+            3,
+            "cs",
+            "Příjmení",
+            new DateTime(),
+            "current user"
+        )
+    ];
+
+
+    public static RouteGroupBuilder MapTranslationsEndpoints(this WebApplication app)
+    {
+        var group = app.MapGroup("translations").WithParameterValidation();
+
+        // GET /translations
+        group.MapGet("/", () => translations);
+
+
+        // GET /translations/{id}
+        group.MapGet("/{id}", (int id) =>
+        {
+            TranslationDto? translation = translations.Find(translation => translation.Id == id);
+
+            return translation is null ? Results.NotFound() : Results.Ok(translation);
+        })
+            .WithName(GetTranslationEndpointName);
+
+        // POST /translations
+        group.MapPost("/", (NewTranslationDto newTranslation, TranslationContext dbContext) =>
+        {
+            Translation translation = new()
+            {
+                Language_id = newTranslation.Language_id,
+                LanguageCode = dbContext.Languages.Find(newTranslation.Language_id),
+                TranslationText = newTranslation.TranslationText,
+                ModifiedAt = DateTime.UtcNow,
+                ModifiedBy = "user.Email"
+            };
+            dbContext.Translations.Add(translation);
+            dbContext.SaveChanges();
+
+            TranslationDto translationDto = new(
+                translation.Id,
+                translation.LanguageCode!.LanguageCode,
+                translation.TranslationText,
+                translation.ModifiedAt,
+                translation.ModifiedBy
+            );
+
+            return Results.CreatedAtRoute(GetTranslationEndpointName, new { id = translation.Id }, translationDto);
+        });
+
+        // PUT /translations/{id}
+        group.MapPut("/{id}", (int id, NewTranslationDto updatedTranslation) =>
+        {
+            var index = translations.FindIndex(translation => translation.Id == id);
+
+            if (index == -1) return Results.NotFound();
+
+            // translations[index] = new TranslationDto(
+            //     id,
+            //     updatedTranslation.LanguageCode,
+            //     updatedTranslation.TranslationText,
+            //     DateTime.Now,
+            //     "user.Email"
+            // );
+
+            return Results.NoContent();
+        });
+
+
+        // DELETE /translations/{id}
+        group.MapDelete("/{id}", (int id) =>
+        {
+            translations.RemoveAll(translation => translation.Id == id);
+
+            return Results.NoContent();
+        });
+
+        return group;
+    }
+}

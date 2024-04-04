@@ -2,9 +2,9 @@
 
 namespace src.api.dtos
 {
-    public record class TranslationDto(
+    public record class TranslationSummaryDto(
         int Id,
-        int Language_id,
+        string LanguageCode,
         string TranslationText,
         DateTime ModifiedAt,
         string ModifiedBy

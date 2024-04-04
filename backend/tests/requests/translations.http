@@ -5,15 +5,15 @@
 GET {{HOSTNAME}}/translations
 
 ###
-GET {{HOSTNAME}}/translations/1
+GET {{HOSTNAME}}/translations/2
 
 ###
 POST {{HOSTNAME}}/translations
 Content-Type: application/json
 
 {
-    "language": "sk",
-    "translation": "Priezvisko"
+    "language_id": 7,
+    "translationText": "Priezvisko"
 }
 
 ###
@@ -21,12 +21,12 @@ PUT {{HOSTNAME}}/translations/3
 Content-Type: application/json
 
 {
-    "language": "cs",
-    "translation": "Příjmení updated"
+    "language_id": 1,
+    "translationText": "hi, this is a test"
 }
 
 ###
-DELETE {{HOSTNAME}}/translations/3
+DELETE {{HOSTNAME}}/translations/10
 
 
 
