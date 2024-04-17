@@ -1,32 +1,25 @@
-// needed VS Code extension: REST Client
+@HOSTNAME=http://localhost:5050/translations
 
-@HOSTNAME=http://localhost:5050
-
-GET {{HOSTNAME}}/translations
+GET {{HOSTNAME}}/project2/prod/en
 
 ###
-GET {{HOSTNAME}}/translations/2
-
+POST {{HOSTNAME}}/project2/prod/en
 ###
-POST {{HOSTNAME}}/translations
+PUT {{HOSTNAME}}/project2/prod/en
 Content-Type: application/json
 
+[
 {
-    "language_id": 7,
-    "translationText": "Priezvisko"
+    "keyname": "k2",
+    "translationText": "k2 translation update"
+},
+{
+    "keyName": "k5",
+    "translationText": "k5 translation update"
 }
+]
 
 ###
-PUT {{HOSTNAME}}/translations/3
-Content-Type: application/json
-
-{
-    "language_id": 1,
-    "translationText": "hi, this is a test"
-}
-
-###
-DELETE {{HOSTNAME}}/translations/10
-
+DELETE {{HOSTNAME}}/project2/prod/en
 
 

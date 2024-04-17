@@ -9,7 +9,7 @@ public static class TranslationMapping
     {
         return new(
             translation.Id,
-            translation.Language_id,
+            translation.LanguageId,
             translation.TranslationText,
             translation.ModifiedAt,
             translation.ModifiedBy
@@ -31,7 +31,7 @@ public static class TranslationMapping
     {
         return new Translation()
         {
-            Language_id = translation.Language_id,
+            LanguageId = translation.LanguageId,
             TranslationText = translation.TranslationText,
             ModifiedAt = DateTime.UtcNow,
             ModifiedBy = "user.Email"
@@ -43,7 +43,7 @@ public static class TranslationMapping
         return new Translation()
         {
             Id = id,
-            Language_id = translation.Language_id,
+            LanguageId = translation.LanguageId,
             TranslationText = translation.TranslationText,
             ModifiedAt = DateTime.UtcNow,
             ModifiedBy = "user.Email"

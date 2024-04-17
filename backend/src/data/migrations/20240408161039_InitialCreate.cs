@@ -4,6 +4,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace src.data.migrations
 {
     /// <inheritdoc />
@@ -31,26 +33,40 @@ namespace src.data.migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Language_id = table.Column<int>(type: "integer", nullable: false),
-                    LanguageCodeId = table.Column<int>(type: "integer", nullable: true),
                     TranslationText = table.Column<string>(type: "text", nullable: false),
                     ModifiedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    ModifiedBy = table.Column<string>(type: "text", nullable: true)
+                    ModifiedBy = table.Column<string>(type: "text", nullable: true),
+                    LanguageId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Translations", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Translations_Languages_LanguageCodeId",
-                        column: x => x.LanguageCodeId,
+                        name: "FK_Translations_Languages_LanguageId",
+                        column: x => x.LanguageId,
                         principalTable: "Languages",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Languages",
+                columns: new[] { "Id", "LanguageCode" },
+                values: new object[,]
+                {
+                    { 1, "en" },
+                    { 2, "en-US" },
+                    { 3, "de" },
+                    { 4, "fr" },
+                    { 5, "it" },
+                    { 6, "cs" },
+                    { 7, "sk" }
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Translations_LanguageCodeId",
+                name: "IX_Translations_LanguageId",
                 table: "Translations",
-                column: "LanguageCodeId");
+                column: "LanguageId");
         }
 
         /// <inheritdoc />

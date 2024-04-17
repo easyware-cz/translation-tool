@@ -12,7 +12,7 @@ using src.data.db;
 namespace src.data.migrations
 {
     [DbContext(typeof(TranslationContext))]
-    [Migration("20240404181848_InitialCreate")]
+    [Migration("20240408161039_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -40,6 +40,43 @@ namespace src.data.migrations
                     b.HasKey("Id");
 
                     b.ToTable("Languages");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            LanguageCode = "en"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            LanguageCode = "en-US"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            LanguageCode = "de"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            LanguageCode = "fr"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            LanguageCode = "it"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            LanguageCode = "cs"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            LanguageCode = "sk"
+                        });
                 });
 
             modelBuilder.Entity("src.data.entities.Translation", b =>
@@ -50,10 +87,7 @@ namespace src.data.migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("LanguageCodeId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("Language_id")
+                    b.Property<int>("LanguageId")
                         .HasColumnType("integer");
 
                     b.Property<DateTime>("ModifiedAt")
@@ -68,7 +102,7 @@ namespace src.data.migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("LanguageCodeId");
+                    b.HasIndex("LanguageId");
 
                     b.ToTable("Translations");
                 });
@@ -76,10 +110,17 @@ namespace src.data.migrations
             modelBuilder.Entity("src.data.entities.Translation", b =>
                 {
                     b.HasOne("src.data.entities.Language", "LanguageCode")
-                        .WithMany()
-                        .HasForeignKey("LanguageCodeId");
+                        .WithMany("Translations")
+                        .HasForeignKey("LanguageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("LanguageCode");
+                });
+
+            modelBuilder.Entity("src.data.entities.Language", b =>
+                {
+                    b.Navigation("Translations");
                 });
 #pragma warning restore 612, 618
         }

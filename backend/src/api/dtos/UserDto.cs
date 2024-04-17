@@ -1,7 +1,7 @@
 ﻿namespace src.api.dtos
 {
     public record class UserDto(
-        int User_id,
+        int Id,
         string Email,
         string Password
     );

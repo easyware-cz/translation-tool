@@ -3,7 +3,7 @@
 namespace src.api.dtos
 {
     public record class NewTranslationDto(
-        int Language_id,
+        int LanguageId,
         [Required] string TranslationText,
         DateTime ModifiedAt,
         string ModifiedBy
