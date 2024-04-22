@@ -7,6 +7,26 @@ public static class LanguageMapping
 {
     public static LanguageDto ToDto(this Language language)
     {
-        return new LanguageDto(language.Id, language.LanguageCode);
+        return new LanguageDto(
+            language.Id,
+            language.LanguageCode
+        );
+    }
+
+    public static Language ToEntity(this LanguageNewDto language)
+    {
+        return new Language()
+        {
+            LanguageCode = language.LanguageCode
+        };
+    }
+
+    public static Language ToEntity(this LanguageNewDto language, int id)
+    {
+        return new Language()
+        {
+            Id = id,
+            LanguageCode = language.LanguageCode
+        };
     }
 }

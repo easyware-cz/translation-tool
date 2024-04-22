@@ -1,0 +1,28 @@
+@HOSTNAME=http://localhost:5050/translations
+
+GET {{HOSTNAME}}/project3
+
+###
+GET {{HOSTNAME}}/project3/test
+
+###
+POST {{HOSTNAME}}/project3
+Content-Type: application/json
+
+{
+    "name": "prod2"
+}
+
+###
+PUT {{HOSTNAME}}/project3/test2
+Content-Type: application/json
+
+{
+    "name": "test"
+}
+
+###
+DELETE {{HOSTNAME}}/project3/prod2
+
+
+

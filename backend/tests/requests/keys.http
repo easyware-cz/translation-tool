@@ -1,0 +1,47 @@
+@HOSTNAME=http://localhost:5050/translations
+
+GET {{HOSTNAME}}/project2
+
+###
+GET {{HOSTNAME}}/project2/prod/keys
+
+###
+POST {{HOSTNAME}}/project2/prod/keys
+Content-Type: application/json
+
+[
+{
+    "name": "k1",
+    "description": "k1 description"
+},
+{
+    "name": "k2",
+    "description": "k2 description"
+},
+{
+    "name": "k3",
+    "description": "k3 description"
+},
+{
+    "name": "k4",
+    "description": "k4 description"
+},
+{
+    "name": "k5",
+    "description": "k5 description"
+}
+]
+
+###
+PUT {{HOSTNAME}}/project2/new test
+Content-Type: application/json
+
+{
+    "name": "test"
+}
+
+###
+DELETE {{HOSTNAME}}/project2/prod/keys
+
+
+

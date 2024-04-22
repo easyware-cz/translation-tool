@@ -1,7 +1,9 @@
 ﻿namespace src.api.dtos
 {
-    public record class TranslationDto(
+    public record class TranslationFullDto(
         int Id,
+        string ProjectName,
+        string EnvName,
         string KeyName,
         string KeyDescription,
         string LanguageCode,

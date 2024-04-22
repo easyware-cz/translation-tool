@@ -1,5 +1,26 @@
-@HOSTNAME=http://localhost:5050
+@HOSTNAME=http://localhost:5050/languages
 
-GET {{HOSTNAME}}/languages
+GET {{HOSTNAME}}
 
+###
+GET {{HOSTNAME}}/8
+
+###
+POST {{HOSTNAME}}
+Content-Type: application/json
+
+{
+    "languageCode": "test"
+}
+
+###
+PUT {{HOSTNAME}}/10
+Content-Type: application/json
+
+{
+    "languageCode": "test new"
+}
+
+###
+DELETE {{HOSTNAME}}/10
 

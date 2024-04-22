@@ -5,48 +5,58 @@ namespace src.data.mapping;
 
 public static class TranslationMapping
 {
-        public static TranslationDto ToTranslationDto(this Translation translation)
+        public static TranslationDto ToDto(this Translation translation)
     {
         return new(
             translation.Id,
-            translation.LanguageId,
+            //translation.KeyId,
+            translation.Key!.Name,
+            translation.Key.Description!,
+            //translation.LanguageId,
+            translation.Language!.LanguageCode,
             translation.TranslationText,
-            translation.ModifiedAt,
-            translation.ModifiedBy
+            translation.UpdatedAt,
+            translation.UpdatedBy!
         );
     }
         
-    public static TranslationSummaryDto ToTranslationSummaryDto(this Translation translation)
+    public static TranslationFullDto ToFullDto(this Translation translation)
     {
         return new(
             translation.Id,
-            translation.LanguageCode!.LanguageCode,
+            translation.Key!.Env!.Project!.Name,
+            translation.Key.Env.Name,
+            translation.Key.Name,
+            translation.Key.Description!,
+            translation.Language!.LanguageCode,
             translation.TranslationText,
-            translation.ModifiedAt,
-            translation.ModifiedBy
+            translation.UpdatedAt,
+            translation.UpdatedBy!
         );
     }
 
-    public static Translation ToEntity(this NewTranslationDto translation)
+    public static Translation ToEntity(this TranslationNewDto translation, int keyId, int languageId)
     {
         return new Translation()
         {
-            LanguageId = translation.LanguageId,
+            KeyId = keyId,
+            LanguageId = languageId,
             TranslationText = translation.TranslationText,
-            ModifiedAt = DateTime.UtcNow,
-            ModifiedBy = "user.Email"
+            UpdatedAt = DateTime.UtcNow,
+            UpdatedBy = "user.Email"
         };
     }
 
-    public static Translation ToEntity(this NewTranslationDto translation, int id)
+    public static Translation ToEntity(this TranslationNewDto translation, int keyId, int languageId, int id)
     {
         return new Translation()
         {
             Id = id,
-            LanguageId = translation.LanguageId,
+            KeyId = keyId,
+            LanguageId = languageId,
             TranslationText = translation.TranslationText,
-            ModifiedAt = DateTime.UtcNow,
-            ModifiedBy = "user.Email"
+            UpdatedAt = DateTime.UtcNow,
+            UpdatedBy = "user.Email"
         };
     }
 }

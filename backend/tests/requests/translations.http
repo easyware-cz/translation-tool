@@ -1,6 +1,6 @@
 @HOSTNAME=http://localhost:5050/translations
 
-GET {{HOSTNAME}}/project2/prod/en
+GET {{HOSTNAME}}/project2/prod/de
 
 ###
 POST {{HOSTNAME}}/project2/prod/en
