@@ -13,7 +13,7 @@ builder.Services.AddSwaggerGen(options =>
     {
         Version = "v1",
         Title = "Translation tool",
-        Description = "ASP.NET Core Web API for managing translations<br />This tool was created primarily to learn the basics of web application development.<br /><br /><a href=https://github.com/easyware-cz/translation-tool>GitHub repository</a>"
+        Description = "This tool was created primarily to learn the basics of web application development.\n\nTech stack:\n- On back-end:\n  - ASP.NET Core in .NET 8.0\n  - Minimal APIs\n  - Entity Framework Core 8.0.2\n  - PostgreSQL 16\n- On front-end (NOT YET DONE):\n  - React.js\n  - Typescript\n  - MaterialUI\n- Other tools:\n  - Swagger\n  - GitHub\n\n<a href=https://github.com/easyware-cz/translation-tool>GitHub repository</a>"
     });
 });
 
