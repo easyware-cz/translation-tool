@@ -5,7 +5,7 @@ namespace src.data.mapping;
 
 public static class TranslationMapping
 {
-        public static TranslationDto ToDto(this Translation translation)
+    public static TranslationDto ToDto(this Translation translation)
     {
         return new(
             translation.Id,
@@ -35,26 +35,26 @@ public static class TranslationMapping
         );
     }
 
-    public static Translation ToEntity(this TranslationNewDto translation, int keyId, int languageId)
+    public static Translation ToEntity(this TranslationNewDto translationNewDto, int keyId, int languageId)
     {
         return new Translation()
         {
             KeyId = keyId,
             LanguageId = languageId,
-            TranslationText = translation.TranslationText,
+            TranslationText = translationNewDto.TranslationText,
             UpdatedAt = DateTime.UtcNow,
             UpdatedBy = "user.Email"
         };
     }
 
-    public static Translation ToEntity(this TranslationNewDto translation, int keyId, int languageId, int id)
+    public static Translation ToEntity(this TranslationNewDto translationNewDto, int keyId, int languageId, int id)
     {
         return new Translation()
         {
             Id = id,
             KeyId = keyId,
             LanguageId = languageId,
-            TranslationText = translation.TranslationText,
+            TranslationText = translationNewDto.TranslationText,
             UpdatedAt = DateTime.UtcNow,
             UpdatedBy = "user.Email"
         };

@@ -125,20 +125,71 @@ namespace src.data.migrations
                     { 8, "sk" }
                 });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Envs_ProjectId",
+            migrationBuilder.InsertData(
+                table: "Projects",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "project1" },
+                    { 2, "project2" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "Envs",
-                column: "ProjectId");
+                columns: new[] { "Id", "Name", "ProjectId" },
+                values: new object[,]
+                {
+                    { 1, "test", 1 },
+                    { 2, "prod", 1 },
+                    { 3, "test", 2 }
+                });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Keys_EnvId",
+            migrationBuilder.InsertData(
                 table: "Keys",
-                column: "EnvId");
+                columns: new[] { "Id", "Description", "EnvId", "Name" },
+                values: new object[,]
+                {
+                    { 1, "description of key1", 1, "key1" },
+                    { 2, "description of key2", 1, "key2" },
+                    { 3, "description of key3", 1, "key3" },
+                    { 4, "description of key4", 1, "key4" },
+                    { 5, "description of key5", 1, "key5" },
+                    { 6, "description of key1", 2, "key1" },
+                    { 7, "description of key2", 2, "key2" },
+                    { 8, "description of key3", 2, "key3" },
+                    { 9, "description of key4", 2, "key4" },
+                    { 10, "description of key5", 2, "key5" }
+                });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Translations_KeyId",
+                name: "IX_Envs_ProjectId_Name",
+                table: "Envs",
+                columns: new[] { "ProjectId", "Name" },
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Keys_EnvId_Name",
+                table: "Keys",
+                columns: new[] { "EnvId", "Name" },
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Languages_LanguageCode",
+                table: "Languages",
+                column: "LanguageCode",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Projects_Name",
+                table: "Projects",
+                column: "Name",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Translations_KeyId_LanguageId",
                 table: "Translations",
-                column: "KeyId");
+                columns: new[] { "KeyId", "LanguageId" },
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Translations_LanguageId",

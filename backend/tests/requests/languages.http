@@ -18,7 +18,7 @@ PUT {{HOSTNAME}}/10
 Content-Type: application/json
 
 {
-    "languageCode": "test new"
+    "languageCode": "test10"
 }
 
 ###

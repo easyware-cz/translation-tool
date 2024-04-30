@@ -1,16 +1,24 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 using src.api.endpoints;
 using src.data.db;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddAuthorization();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Version = "v1",
+        Title = "Translation tool",
+        Description = "ASP.NET Core Web API for managing translations<br />This tool was created primarily to learn the basics of web application development.<br /><br /><a href=https://github.com/easyware-cz/translation-tool>GitHub repository</a>"
+    });
+});
 
 var connectionString = builder.Configuration.GetConnectionString("PostgresConnection");
 builder.Services.AddDbContext<TranslationContext>(options => options.UseNpgsql(connectionString));
-//builder.Services.AddEntityFrameworkNpgsql().AddDbContext<TranslationContext>(options => options.UseNpgsql(connectionString));
-//builder.Services.AddNpgsql<TranslationContext>(connectionString);
 
 var app = builder.Build();
 
@@ -20,7 +28,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.MapProjectsEndpointsAsync();
+app.MapProjectsEndpoints();
 app.MapEnvsEndpoints();
 app.MapLanguagesEndpoints();
 app.MapKeysEndpoints();

@@ -1,25 +1,25 @@
 @HOSTNAME=http://localhost:5050/translations
 
-GET {{HOSTNAME}}/project2/prod/de
+GET {{HOSTNAME}}/project1/test/
 
 ###
-POST {{HOSTNAME}}/project2/prod/en
+POST {{HOSTNAME}}/project1/test/cs
 ###
-PUT {{HOSTNAME}}/project2/prod/en
+PUT {{HOSTNAME}}/project1/test/en
 Content-Type: application/json
 
 [
 {
-    "keyname": "k2",
+    "keyname": "key2",
     "translationText": "k2 translation update"
 },
 {
-    "keyName": "k5",
+    "keyName": "key5",
     "translationText": "k5 translation update"
 }
 ]
 
 ###
-DELETE {{HOSTNAME}}/project2/prod/en
+DELETE {{HOSTNAME}}/project1/test/en
 
 

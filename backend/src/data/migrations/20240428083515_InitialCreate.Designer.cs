@@ -12,7 +12,7 @@ using src.data.db;
 namespace src.data.migrations
 {
     [DbContext(typeof(TranslationContext))]
-    [Migration("20240417000430_InitialCreate")]
+    [Migration("20240428083515_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -42,9 +42,30 @@ namespace src.data.migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProjectId");
+                    b.HasIndex("ProjectId", "Name")
+                        .IsUnique();
 
                     b.ToTable("Envs");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "test",
+                            ProjectId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "prod",
+                            ProjectId = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "test",
+                            ProjectId = 2
+                        });
                 });
 
             modelBuilder.Entity("src.data.entities.Key", b =>
@@ -67,9 +88,82 @@ namespace src.data.migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EnvId");
+                    b.HasIndex("EnvId", "Name")
+                        .IsUnique();
 
                     b.ToTable("Keys");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "description of key1",
+                            EnvId = 1,
+                            Name = "key1"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "description of key2",
+                            EnvId = 1,
+                            Name = "key2"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Description = "description of key3",
+                            EnvId = 1,
+                            Name = "key3"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Description = "description of key4",
+                            EnvId = 1,
+                            Name = "key4"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Description = "description of key5",
+                            EnvId = 1,
+                            Name = "key5"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Description = "description of key1",
+                            EnvId = 2,
+                            Name = "key1"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Description = "description of key2",
+                            EnvId = 2,
+                            Name = "key2"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Description = "description of key3",
+                            EnvId = 2,
+                            Name = "key3"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Description = "description of key4",
+                            EnvId = 2,
+                            Name = "key4"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Description = "description of key5",
+                            EnvId = 2,
+                            Name = "key5"
+                        });
                 });
 
             modelBuilder.Entity("src.data.entities.Language", b =>
@@ -85,6 +179,9 @@ namespace src.data.migrations
                         .HasColumnType("text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("LanguageCode")
+                        .IsUnique();
 
                     b.ToTable("Languages");
 
@@ -145,7 +242,22 @@ namespace src.data.migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Name")
+                        .IsUnique();
+
                     b.ToTable("Projects");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "project1"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "project2"
+                        });
                 });
 
             modelBuilder.Entity("src.data.entities.Translation", b =>
@@ -174,9 +286,10 @@ namespace src.data.migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("KeyId");
-
                     b.HasIndex("LanguageId");
+
+                    b.HasIndex("KeyId", "LanguageId")
+                        .IsUnique();
 
                     b.ToTable("Translations");
                 });

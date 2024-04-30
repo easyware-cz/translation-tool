@@ -1,11 +1,8 @@
-﻿using System.Linq.Expressions;
-using Microsoft.EntityFrameworkCore;
-using src.api.dtos;
+﻿using Microsoft.EntityFrameworkCore;
 using src.data.db;
 using src.data.entities;
-using src.data.mapping;
 
-namespace src.api.methods;
+namespace src.api.utilities;
 
 public static class EndpointsMethods
 {
@@ -59,7 +56,7 @@ public static class EndpointsMethods
         await dbContext.SaveChangesAsync();
     }
     
-    // public static async Task<int> GetProjectId(string projectName, TranslationContext dbContext)
+    // public static async Task<int> GetProjectIdAsync(string projectName, TranslationContext dbContext)
     // {
     //     Project? project = await dbContext.Projects.FirstOrDefaultAsync(p => p.Name == projectName);
     //     return project is null ? -1 : project.Id;

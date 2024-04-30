@@ -1,12 +1,12 @@
 @HOSTNAME=http://localhost:5050/translations
 
-GET {{HOSTNAME}}/project2
+GET {{HOSTNAME}}/project1/prod/keys
 
 ###
-GET {{HOSTNAME}}/project2/prod/keys
+GET {{HOSTNAME}}/project1/test/keys/2
 
 ###
-POST {{HOSTNAME}}/project2/prod/keys
+POST {{HOSTNAME}}/project1/prod/keys
 Content-Type: application/json
 
 [
@@ -41,7 +41,7 @@ Content-Type: application/json
 }
 
 ###
-DELETE {{HOSTNAME}}/project2/prod/keys
+DELETE {{HOSTNAME}}/project1/prod/keys
 
 
 

@@ -13,6 +13,15 @@ public static class EnvMapping
         );
     }
 
+    public static EnvFullDto ToDto(this Env env, HashSet<string> localizations)
+    {
+        return new(
+            env.Id,
+            env.Name,
+            localizations
+        );
+    }
+
     public static Env ToEntity(this EnvNewDto env, int projectId)
     {
         return new Env()
